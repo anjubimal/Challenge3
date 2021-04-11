@@ -9,22 +9,28 @@ function generatePassword() {
     var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
     var special_characters = ["!", "#", "$", "%", "&"];
 
+    // var upper = prompt("Include uppercase, yes or no?");
+    //verify length
+    function confirmLength() {
     var length = prompt("Password length should be at least 8 characters and no more than 128 characters. Choose length.");
-    var upper = prompt("Include uppercase, yes or no?");
+    if (length > 7 && length < 129) {
+        passwordLength = parseInt(length);
+    } else {
+        confirm("Incorrect Length")
+        confirmLength();
+    }
+}
+
+    confirmLength();
     var lower = prompt("Include lowercase, yes or no?");
     var numeric = prompt("Include numeric characters, yes or no?");
     var special = prompt("Include special characters, yes or no?");
 
-    //verify length
-    if (length > 7 && length < 129) {
-        passwordLength = parseInt(length);
-    }
-
 
     let charCodes = upper_case
-    if (lower) charCodes = charCodes.concat(lower_case);
-    if (numeric) charCodes = charCodes.concat(numbers);
-    if (special) charCodes = charCodes.concat(special_characters);
+    if (lower === "yes") charCodes = charCodes.concat(lower_case);
+    if (numeric === "yes") charCodes = charCodes.concat(numbers);
+    if (special === "yes") charCodes = charCodes.concat(special_characters);
 
 
     console.log(charCodes);
@@ -34,6 +40,8 @@ function generatePassword() {
         password_generated.push(character)
 
     }
+
+    //remove 
     password_generated = password_generated.join("");
     return password_generated;
 }
